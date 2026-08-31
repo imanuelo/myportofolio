@@ -1,4 +1,4 @@
-Name : Juan Imanuel Limpong
+Name : Juan Imanuel
 
 NPM : 2506619455
 
