@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from main.models import Experience
+from main.models import Experience, Project
 
 
 class MainTest(TestCase):
@@ -56,3 +56,27 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Completed")
         self.assertNotContains(response, "Ongoing")
+
+    def test_projects_url_is_accessible(self):
+        response = self.client.get(reverse("main:show_projects"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "projects.html")
+
+    def test_project_data_appears(self):
+        project = Project.objects.create(
+            title="WeAreUI Marketplace Redesign",
+            description="Redesigned the WeAreUI marketplace to improve usability, visual hierarchy, and shopping experience.",
+            category="UI/UX Design",
+        )
+
+        response = self.client.get(reverse("main:show_projects"))
+
+        self.assertContains(response, project.title)
+        self.assertContains(response, project.description)
+        self.assertContains(response, project.category)
+
+    def test_empty_projects_page(self):
+        response = self.client.get(reverse("main:show_projects"))
+
+        self.assertContains(response, "No projects have been added yet.")
