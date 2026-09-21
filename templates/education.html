@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block meta %}
+    <title>Education - {{ name }}</title>
+{% endblock meta %}
+{% block content %}
+    <main>
+        <section class="page-section" id="education">
+            <div class="container">
+                <p class="section-kicker">My academic journey</p>
+                <div class="page-header">
+                    <h1>Education</h1>
+                    <a href="{% url 'main:create_education' %}"
+                       class="button project-add-button">
+                        <span aria-hidden="true">+</span>
+                        Add Education
+                    </a>
+                </div>
+                <form method="get"
+                      action="{% url 'main:show_education' %}"
+                      class="project-search">
+                    <input type="search"
+                           name="institution"
+                           value="{{ institution_query }}"
+                           placeholder="Search by name institution"
+                           class="project-search__input"
+                           aria-label="Search by name institution">
+                    <button type="submit" class="button">Search</button>
+                </form>
+                <div class="project-grid">
+                    {% for education in education_list %}
+                        <article class="card">
+                            <h2>{{ education.institution }}</h2>
+                            <span class="card-category">{{ education.degree }}</span>
+                            <p class="card-description">{{ education.start_year }} - {{ education.end_year }}</p>
+                            <p class="card-description">{{ education.description }}</p>
+                            <div class="project-card-actions">
+                                <div class="project-actions">
+                                    <a href="{% url 'main:update_education' education.id %}" class="button">Edit</a>
+                                    {% include "components/education_delete_modal.html" with education=education %}
+                                </div>
+                            </div>
+                        </article>
+                    {% empty %}
+                        {% if institution_query %}
+                            <p class="empty-state">Education not found.</p>
+                        {% else %}
+                            <p class="empty-state">No education has been added yet.</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock content %}

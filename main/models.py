@@ -17,6 +17,7 @@ class Experience(models.Model):
     category = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default='full-time')
     started_at = models.DateTimeField(auto_now_add=True)
     ended_at = models.DateTimeField(blank=True, null=True)
+    
     def __str__(self):
         return self.title
     
@@ -31,5 +32,17 @@ class Project(models.Model):
     category = models.CharField(max_length=255)
     project_url = models.URLField(blank=True)
     thumbnail = models.URLField(blank=True, max_length=500)
+
     def __str__(self):
         return self.title
+
+
+class Education(models.Model):
+    institution = models.CharField(max_length=255)
+    degree = models.CharField(max_length=255)
+    start_year = models.IntegerField()
+    end_year = models.IntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.instituion
