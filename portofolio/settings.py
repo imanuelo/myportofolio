@@ -149,4 +149,4 @@ WHITENOISE_USE_FINDERS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUESTED_ORIGINS = ["https://juan-imanuel-myportofolio.pws.cs.ui.ac.id"]
+CSRF_TRUSTED_ORIGINS = ["https://juan-imanuel-myportofolio.pws.cs.ui.ac.id"]
