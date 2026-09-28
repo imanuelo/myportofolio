@@ -36,12 +36,19 @@
                             <p class="card-description">{{ education.start_year }} - {{ education.end_year }}</p>
                             <p class="card-description">{{ education.description }}</p>
                             <div class="project-card-actions">
-                                {% if user.is_superuser %}
-                                    <div class="project-actions">
-                                        <a href="{% url 'main:update_education' education.id %}" class="button">Edit</a>
-                                        {% include "components/education_delete_modal.html" with education=education %}
-                                    </div>
-                                {% endif %}
+                                <div class="project-actions">
+                                        {% if perms.main.change_education %}
+                                        <div class="project-edit">
+                                            {% if perms.main.change_education %}
+                                                <a href="{% url 'main:update_education' education.id %}" class="button button-edit">Edit</a>
+                                            {% endif %}
+
+                                            {% if user.is_superuser %}
+                                                {% include "components/education_delete_modal.html" with education=education %}
+                                            {% endif %}
+                                        </div>
+                                        {% endif %}
+                                </div>
                             </div>
                         </article>
                     {% empty %}

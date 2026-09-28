@@ -9,6 +9,7 @@ from main.views import (
     delete_project,
     show_education,
     create_education,
+    update_project,
     get_education_json,
     update_education,
     delete_education,
@@ -36,4 +37,5 @@ urlpatterns = [
     path("login/", login_user, name="login"),
     path("logout/", logout_user, name="logout"),
     path("projects/<uuid:project_id>/star/", toggle_star, name="toggle_star",),
+    path("projects/<uuid:project_id>/edit/", update_project, name="update_project")
 ]

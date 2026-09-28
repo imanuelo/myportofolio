@@ -153,7 +153,7 @@ def delete_education(request, education_id):
 
 @login_required(login_url="/login/")
 def update_education(request, education_id):
-    if not request.user.is_superuser:
+    if not request.user.has_perm("main.change_project"):
         raise PermissionDenied
     
     education = get_object_or_404(Education, pk=education_id)
@@ -175,6 +175,33 @@ def update_education(request, education_id):
     }
 
     return render(request, "education_form.html", context)
+
+
+@login_required(login_url="/login/")
+def update_project(request, project_id):
+    if not request.user.has_perm("main.change_education"):
+        raise PermissionDenied
+
+    project = get_object_or_404(Project, pk=project_id)
+
+    form = ProjectForm(
+        request.POST or None,
+        instance=project
+    )
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Project updated successfully.")
+        return redirect("main:show_projects")
+
+    context = {
+        "name": "Juan Imanuel Limpong",
+        "form": form,
+        "project": project,
+    }
+
+    return render(request, "projects_form.html", context)
+
 
 
 def get_projects_json(request):

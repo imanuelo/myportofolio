@@ -7,20 +7,25 @@ Class : PBP A
 # Deskripsi Proyek
 Proyek ini merupakan website portofolio pribadi yang dibuat menggunakan Django. Website ini menampilkan informasi seperti profil, pengalaman, proyek, dan pendidikan.
 
+Website ini dikembangkan secara bertahap melalui beberapa tugas dengan menerapkan konsep Django seperti Model-View-Template (MVT), ModelForm, JSON API, Authentication, dan Authorization.
+
 
 ## Testing dan Run Project
-Untuk memastikan websitenya berjalan dengan baik, gunakan:
+Untuk memastikan websitenya berjalan dengan baik, gunakan perintah:
 
 python manage.py check, atau
+
+Perintah tersebut digunakan untuk memeriksa konfigurasi dan mendeteksi masalah yang ada pada proyek Django.
+
+Untuk menjalankan test pada aplikasi main, gunakan:
+
 python manage.py test main
 
-Perintah diatas digunakan untuk mengecek apakah terdapat error pada proyek sebelum menjalankan server
-
-Jika tidak ada error maka bisa langsung gunakan:
+Jika tidak terdapat error, maka server dapat dijalankan menggunakan:
 
 python manage.py runserver
 
-Untuk menjalankan server
+Setelah server berjalan, website dapat diakses melalui alamat yang ditampilkan oleh Django.
 
 
 
@@ -36,7 +41,7 @@ Dalam pengerjaan tugas ini, saya menggunakan ChatGPT sebagai bantuan untuk memah
 
 
 
-## Tugas 3
+## Refleksi Tugas 3
 1. ModelForm digunakan karena dapat membuat form berdasarkan model Django tanpa harus membuat semua field secara manual, sehingga lebih praktis digunakan. Dengan ModelForm, data yang diisi juga lebih mudah divalidasi dan disimpan ke database.
 {% csrf_token %} digunakan untuk melindungi form dari CSRF (Cross-Site Request Forgery) yaitu serangan yang dapat membuat user mengirimkan request tanpa sengaja. Token ini memastikan request benar-benar berasal dari form yang dibuat oleh aplikasi kita.
 
@@ -48,3 +53,22 @@ Dalam pengerjaan tugas ini, saya menggunakan ChatGPT sebagai bantuan untuk memah
 Dalam pengerjaan tugas ini, saya menggunakan ChatGPT sebagai alat bantu untuk memahami konsep Django, serta mengecek apakah ada barisan kode yang error.
 
 Seluruh kode dan implementasi tetap saya pelajari, dan sesuaikan secara manual dengan kebutuhan proyek dan instruksi tugas.
+
+
+
+## Tugas 4
+Sebelum mengerjakan tugas 4, saya telah menyelesaikan tutorial 4 dan belajar mengenai konsep Authentication dan Authorization. Di tugas 4 ini saya menerapkan kedua konsep tersebut untuk membatasi tindakan yang dapat dilakukan oleh setiap pengguna. Terdapat empat role, yaitu:
+
+1. Pengunjung yang belum login; hanya dapat melihat data yang ada pada website. Untuk memberikan Star pada Project, pengunjung harus login terlebih dahulu.
+
+2. Pengguna yang sudah login; dapat melihat data serta memberikan atau membatalkan Star pada Project. Namun, tidak dapat menambah/mengubah Project maupun Education.
+
+3. Editor (dibuat menggunakan fitur Group pada Django Admin). Editor memiliki hak yang sama seperti pengguna yang sudah login, bedanya dapat mengubah/mengedit data Project dan Education. Editor tidak dapat menambah/menghapus data.
+
+4. Pemilik portofolio (superuser); dapat melihat data, memberikan atau membatalkan Star, serta menambah/mengubah dan menghapus data Project maupun Education.
+
+## Deklarasi AI Tugas 4
+Dalam pengerjaan tugas ini, saya menggunakan ChatGPT sebagai alat bantu untuk memahami konsep Authentication dan Authorization pada Django, khususnya membantu untuk mengecek bagian kode yang masih error.
+
+Link percakapan dengan ChatGPT:
+https://chatgpt.com/share/6aba7d54-7eac-83ec-b4eb-db78a1a845a0

@@ -406,15 +406,29 @@ h1, .brand {
 
 .project-actions {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 1rem;
 }
 
+.project-edit,
+.project-view {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .project-actions .button {
     font-size: 0.85rem;
     font-weight: 600;
+}
+
+.button-edit {
+    background-color: #eff9ff !important;
+    color: var(--accent) !important;
+    border: 2px solid var(--accent) !important;
 }
 
 .project-card-actions {
@@ -500,7 +514,7 @@ h1, .brand {
 }
 
 .button-danger {
-    background: #b42318;
+    background: #b42318 !important;
 }
 
 .star-form {
