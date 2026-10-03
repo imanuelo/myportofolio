@@ -72,3 +72,18 @@ Dalam pengerjaan tugas ini, saya menggunakan ChatGPT sebagai alat bantu untuk me
 
 Link percakapan dengan ChatGPT:
 https://chatgpt.com/share/6aba7d54-7eac-83ec-b4eb-db78a1a845a0
+
+
+
+## Refleksi Tugas 5
+1. Debouncing adalah teknik untuk menunda pemanggilan suatu fungsi hingga jeda waktu berlalu tanpa adanya event baru. Pada pencarian yang menggunakan AJAX, teknik ini mencegah request yang dikirim setiap kali pengguna mengetik, sehingga jumlah request dan beban server dapat dikurangi serta proses pencarian jadi lebih efisien.
+
+2. await digunakan untuk menunggu sampai proses fetch() selesai sebelum baris kode berikutnya dijalankan. Tanpa adanya await, kode akan langsung melanjutkan prosesnya tanpa menunggu hasil dari fetch(), sehingga data yang dibutuhkan mungkin belum tersedia ketika digunakan.
+
+3. Cross-Site Scripting (XSS) adalah serangan ketika penyerang berhasil menyisipkan kode JavaScript miliknya ke dalam halaman web yang kemudian dijalankan di browser pengguna lain. Data yang ditampilkan melalui AJAX/JavaScript lebih rentan karena data tersebut dimasukan ke halaman web secara langsung oleh JavaScript. Jika data tersebut tidak di escape, kode berbahaya dapat dijalankan oleh browser. Sedangkan Django secara otomatis melakukan escaping pada data yang ditampilkan menggunakan {{}}.
+
+## Deklarasi AI Tugas 5
+Pada pengerjaan tugas 5, saya menggunakan ChatGPT sebagai alat bantu untuk memahami materi terkait AJAX serta mengecek kode untuk mencari kemungkinan adanya penulisan kode yang typo/error.
+
+Link percakapan dengan ChatGPT:
+https://chatgpt.com/share/6ac0f7c9-a8f0-83ec-9154-9a7f00aab680

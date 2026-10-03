@@ -70,8 +70,9 @@ class MainTest(TestCase):
             category="UI/UX Design",
         )
 
-        response = self.client.get(reverse("main:show_projects"))
+        response = self.client.get(reverse("main:get_projects_json"))
 
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, project.title)
         self.assertContains(response, project.description)
         self.assertContains(response, project.category)
@@ -79,4 +80,4 @@ class MainTest(TestCase):
     def test_empty_projects_page(self):
         response = self.client.get(reverse("main:show_projects"))
 
-        self.assertContains(response, "No projects have been added yet.")
+        self.assertContains(response, "No projects have been added yet or found.")

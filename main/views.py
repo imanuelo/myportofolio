@@ -48,19 +48,12 @@ def show_projects(request):
 
 
 def show_education(request):
-    json_response = get_education_json(request)
-
-    educations = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    educations = [education.object for education in educations]
     institution_query = request.GET.get("institution", "").strip()
 
     context = {
         "name": "Juan Imanuel Limpong",
-        "education_list": educations,
-        "institution_query": institution_query
+        "institution_query": institution_query,
+        "form": EducationForm(),
     }
     return render(request, "education.html", context)
 
@@ -236,8 +229,20 @@ def get_education_json(request):
     if institution_query:
         educations = educations.filter(institution__icontains=institution_query)
 
-    institution_json = serializers.serialize("json", educations)
-    return HttpResponse(institution_json, content_type="application/json")
+    data = []
+    for education in educations:
+        data.append({
+            "pk": str(education.id),
+            "fields": {
+                "institution": education.institution,
+                "degree": education.degree,
+                "start_year": education.start_year,
+                "end_year": education.end_year,
+                "description": education.description,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 
 def register(request):
@@ -292,6 +297,24 @@ def create_project_ajax(request):
         project = form.save()
         return JsonResponse(
             {"message": "Project added successfully.", "pk": str(project.id)},
+            status=201,
+        )
+    return JsonResponse({"error": form.errors.get_json_data()}, status=400)
+
+
+@require_POST
+def create_education_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portofolio owner can add educations."},
+            status=403,
+        )
+
+    form = EducationForm(request.POST)
+    if form.is_valid():
+        education = form.save()
+        return JsonResponse(
+            {"message": "Education added successfully.", "pk": str(education.id)},
             status=201,
         )
     return JsonResponse({"error": form.errors.get_json_data()}, status=400)

@@ -298,7 +298,7 @@ h1, .brand {
 
 .section-kicker {
     color: var(--accent-dark);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -306,7 +306,7 @@ h1, .brand {
 
 .page-header h1 {
     margin-bottom: 0;
-    font-size: 2rem;
+    font-size: clamp(2rem, 7vw, 3rem) !important;
 }
 
 .experience-grid,

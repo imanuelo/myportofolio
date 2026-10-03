@@ -40,6 +40,7 @@ class Project(models.Model):
 
 
 class Education(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     institution = models.CharField(max_length=255)
     degree = models.CharField(max_length=255)
     start_year = models.IntegerField()
@@ -47,4 +48,4 @@ class Education(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.instituion
+        return self.institution
