@@ -37,9 +37,14 @@ def show_experience(request):
 
 
 def show_projects(request):
+    is_editor = (
+        request.user.is_authenticated and
+        request.user.groups.filter(name="Editor").exists()
+    )
     title_query = request.GET.get("title", "").strip()
 
     context = {
+        "is_editor": is_editor,
         "name": "Juan Imanuel Limpong",
         "title_query": title_query,
         "form": ProjectForm(),
