@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
-class IsPortfolioOwnerOrReadOnly(BasePermission):
+class IsPortofolioOwnerOrReadOnly(BasePermission):
     message = "Only the portfolio owner can change projects."
 
     def has_permission(self, request, view):
@@ -12,6 +12,8 @@ class IsPortfolioOwnerOrReadOnly(BasePermission):
 
 
 class IsPortofolioOwnerOrEditorOrReadOnly(BasePermission):
+    message = "Only the portfolio owner or an editor can perform this action."
+
     def has_permission(self, request, view):
         if request.method in SAFE_METHODS:
             return True

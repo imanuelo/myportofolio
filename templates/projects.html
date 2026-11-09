@@ -205,10 +205,10 @@
             editingProjectId = null;
 
             document.getElementById('add-project-modal').hidePopover();
-            showToast('Success', isEditing ? 'Project updated.': 'Project created.', 'success');
+            showToast('Success', isEditing ? 'Project updated successfulyy.': 'Project created successfully.', 'success');
             await fetchProjects(searchInput.value.trim());
         } catch (error) {
-            showToast('Could not create project', error.message, 'error');
+            showToast('Request failed', error.message, 'error');
         } finally {
             button.disabled = false;
         }
@@ -258,7 +258,7 @@
             const pattern = action === 'star' ? STAR_PROJECT_ENDPOINT : DETAIL_PROJECT_ENDPOINT;
             await writeProject(projectEndpoint(pattern, button.dataset.id),
                 action === 'star' ? 'POST' : 'DELETE');
-            showToast('Success', action === 'star' ? 'Star updated.' : 'Project deleted.', 'success');
+            showToast('Success', action === 'star' ? 'Star updated successfully.' : 'Project deleted successfully.', 'success');
             await fetchProjects(searchInput.value.trim());
         } catch (error) {
             showToast('Request failed', error.message, 'error');

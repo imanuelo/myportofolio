@@ -17,12 +17,15 @@
                 popovertargetaction="hide"
                 aria-label="Close add education form">×</button>
 
-        <h2 id="add-education-modal-institution">Add New Education</h2>
+        <h2 id="add-education-modal-title">Add New Education</h2>
+
         <form id="education-form"
               method="post"
-              action="{% url 'main:create_education' %}"
+              action="{% url 'api:education-list' %}"
               class="project-form">
+
             {% csrf_token %}
+
             {% for field in form %}
             <div class="form-group">
                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -37,7 +40,7 @@
                         class="button button-secondary"
                         popovertarget="add-education-modal"
                         popovertargetaction="hide">Cancel</button>
-                <button type="submit" class="button">Add Education</button>
+                <button type="submit" class="button" id="education-submitbutton">Add Education</button>
             </div>
         </form>
     </div>

@@ -9,6 +9,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from main.models import Experience, Project, Education
 from main.forms import ProjectForm, EducationForm
@@ -52,12 +53,19 @@ def show_projects(request):
     return render(request, "projects.html", context)
 
 
+@ensure_csrf_cookie
 def show_education(request):
     institution_query = request.GET.get("institution", "").strip()
+
+    is_editor  = (
+        request.user.is_authenticated
+        and request.user.groups.filter(name="Editor").exists()
+    )
 
     context = {
         "name": "Juan Imanuel Limpong",
         "institution_query": institution_query,
+        "is_editor": is_editor,
         "form": EducationForm(),
     }
     return render(request, "education.html", context)
@@ -145,7 +153,7 @@ def delete_education(request, education_id):
 
 @login_required(login_url="/login/")
 def update_education(request, education_id):
-    if not request.user.has_perm("main.change_project"):
+    if not request.user.has_perm("main.change_education"):
         raise PermissionDenied
     
     education = get_object_or_404(Education, pk=education_id)
@@ -171,7 +179,7 @@ def update_education(request, education_id):
 
 @login_required(login_url="/login/")
 def update_project(request, project_id):
-    if not request.user.has_perm("main.change_education"):
+    if not request.user.has_perm("main.change_project"):
         raise PermissionDenied
 
     project = get_object_or_404(Project, pk=project_id)
